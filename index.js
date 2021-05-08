@@ -19,7 +19,12 @@ app.all("/*", function (req, res, next) {
 });
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use('/public', express.static(path.join(__dirname, 'static', 'public')))
+app.use(express.static('public'))
+app.use('/static', express.static(path.join(__dirname,  'public')))
+// app.use(express.static(path.join(__dirname, '//frontend/build')));
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(`${__dirname}//frontend/build/index.html`));
+// });
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL:"https://console.firebase.google.com/project/portfolio-88cee/firestore",
@@ -320,8 +325,11 @@ app.delete('/blogs/delete/:id', async (req, res) => {
         console.log('Error getting documents', err);
       });
 });
-app.listen(5000, () => {
-  console.log("server is listening on port: 5000")
-})
+// app.listen(5000, () => {
+//   console.log("server is listening on port: 5000")
+// })
 
+app.listen(process.env.PORT || 5000, function(){
+  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+});
 
