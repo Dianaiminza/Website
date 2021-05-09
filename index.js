@@ -20,11 +20,8 @@ app.all("/*", function (req, res, next) {
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static('public'))
-app.use('/static', express.static(path.join(__dirname,  'public')))
-// app.use(express.static(path.join(__dirname, '//frontend/build')));
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(`${__dirname}//frontend/build/index.html`));
-// });
+// app.use(express.static(path.join(__dirname, '//frontend/public')));
+
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL:"https://console.firebase.google.com/project/portfolio-88cee/firestore",
